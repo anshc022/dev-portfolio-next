@@ -1,58 +1,90 @@
 "use client";
+import { useEffect, useRef } from "react";
+import ScrambleText from "./ScrambleText";
+
+const ticker = ["React", "TypeScript", "Node.js", "Python", "PostgreSQL", "Docker", "Next.js", "Redis", "AWS", "GraphQL", "Go", "Kubernetes"];
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(30px)";
+    requestAnimationFrame(() => {
+      el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0)";
+    });
+  }, []);
+
   return (
-    <section
-      id="home"
-      className="min-h-screen flex items-center relative overflow-hidden pt-28 pb-16 px-10"
-      style={{ maxWidth: "55vw" }}
-    >
-      {/* Floating tags */}
-      <div className="absolute top-[22%] left-[8%] bg-[#141414] border border-[#2a2a2a] rounded-full px-4 py-2 text-xs font-semibold text-[#22d3ee] animate-bounce hidden lg:block">
-        React ⚛
-      </div>
-      <div className="absolute top-[40%] right-[-30%] bg-[#141414] border border-[#2a2a2a] rounded-full px-4 py-2 text-xs font-semibold text-[#39ff14] animate-bounce hidden lg:block" style={{ animationDelay: "0.5s" }}>
-        Node.js 🟢
-      </div>
-      <div className="absolute bottom-[28%] left-[10%] bg-[#141414] border border-[#2a2a2a] rounded-full px-4 py-2 text-xs font-semibold text-[#3b82f6] animate-bounce hidden lg:block" style={{ animationDelay: "1s" }}>
-        TypeScript 💙
-      </div>
+    <section ref={ref} id="home" className="min-h-screen flex flex-col justify-center pt-24 pb-0 overflow-hidden">
 
-      <div className="relative z-10 max-w-xl">
-        <p className="text-xs tracking-[3px] uppercase text-[#888] mb-6">✦ software engineer ✦</p>
+      {/* Main content */}
+      <div className="px-8 md:px-16 lg:px-24 max-w-4xl">
+        <div className="flex items-center gap-3 mb-8">
+          <span className="w-2 h-2 rounded-full bg-[#39ff14] animate-pulse" />
+          <span className="font-fira text-xs text-[#39ff14] tracking-widest uppercase">available for work</span>
+        </div>
 
-        <h1 className="font-syne font-extrabold leading-none tracking-tight mb-6" style={{ fontSize: "clamp(3.5rem, 8vw, 6.5rem)", letterSpacing: "-3px" }}>
-          I build stuff<br />
-          that{" "}
-          <em className="text-[#ff3cac] not-italic">actually</em>
-          <br />
+        <h1
+          className="font-syne font-extrabold leading-[0.95] mb-8"
+          style={{ fontSize: "clamp(4rem, 10vw, 9rem)", letterSpacing: "-4px" }}
+        >
+          I build<br />
+          stuff that<br />
           <span
-            className="not-italic"
+            className="italic not-italic"
             style={{ WebkitTextStroke: "2px #f9f002", color: "transparent" }}
           >
-            works.
-          </span>
+            <ScrambleText text="actually" />
+          </span>{" "}
+          <span className="text-[#ff3cac]">works.</span>
         </h1>
 
-        <p className="text-[#888] text-base leading-relaxed mb-10">
-          not just &ldquo;it works on my machine&rdquo; works.<br />
-          like,{" "}
-          <strong className="text-white">production works.</strong> 🚀
-        </p>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 mb-16">
+          <p className="text-[#888] text-lg leading-relaxed max-w-sm">
+            Full-stack engineer. 3+ years. Ships things people actually use — not just localhost:3000.
+          </p>
+          <div className="flex gap-3 flex-wrap">
+            <a
+              href="#work"
+              className="group relative px-7 py-3.5 rounded-full bg-[#ff3cac] text-white font-semibold text-sm overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(255,60,172,0.4)]"
+            >
+              <span className="relative z-10">see my work →</span>
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
+            </a>
+            <a
+              href="#contact"
+              className="px-7 py-3.5 rounded-full border border-[#2a2a2a] text-white font-semibold text-sm hover:border-[#ff3cac] hover:text-[#ff3cac] transition-all"
+            >
+              let&apos;s talk
+            </a>
+          </div>
+        </div>
 
-        <div className="flex gap-3 flex-wrap">
-          <a
-            href="#work"
-            className="px-7 py-3 rounded-full bg-[#ff3cac] text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(255,60,172,0.5)]"
-          >
-            see my work
-          </a>
-          <a
-            href="#contact"
-            className="px-7 py-3 rounded-full border border-[#2a2a2a] text-white font-semibold text-sm transition-all hover:border-[#ff3cac] hover:text-[#ff3cac]"
-          >
-            let&apos;s collab
-          </a>
+        {/* Stats row */}
+        <div className="flex gap-10 flex-wrap mb-16">
+          {[["3+", "years exp"], ["20+", "projects shipped"], ["10k+", "req/sec handled"], ["0", "bugs* in prod"]].map(([n, l]) => (
+            <div key={l}>
+              <div className="font-syne font-extrabold text-4xl gradient-text leading-none">{n}</div>
+              <div className="font-fira text-[0.7rem] text-[#555] mt-1 uppercase tracking-wide">{l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Marquee ticker */}
+      <div className="relative border-t border-b border-[#1e1e1e] py-4 overflow-hidden bg-[#0a0a0a]/50">
+        <div className="flex gap-0 animate-marquee whitespace-nowrap">
+          {[...ticker, ...ticker, ...ticker].map((t, i) => (
+            <span key={i} className="inline-flex items-center gap-4 px-6 font-fira text-xs text-[#444] uppercase tracking-widest">
+              {t}
+              <span className="text-[#ff3cac] text-base">✦</span>
+            </span>
+          ))}
         </div>
       </div>
     </section>
