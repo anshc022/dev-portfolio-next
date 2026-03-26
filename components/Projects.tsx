@@ -59,7 +59,7 @@ export default function Projects() {
           </h2>
         </div>
 
-        <div ref={ref} className="flex flex-col gap-px border border-[#1e1e1e] rounded-2xl overflow-hidden">
+        <div ref={ref} className="flex flex-col gap-0" style={{ border: "2px solid #2a2a2a", boxShadow: "6px 6px 0px #ff3cac" }}>
           {projects.map((p, i) => (
             <div
               key={p.num}

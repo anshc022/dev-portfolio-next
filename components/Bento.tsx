@@ -16,33 +16,33 @@ const skills = [
   { label: "Kubernetes",  color: "#a855f7", bg: "rgba(168,85,247,0.12)",  border: "rgba(168,85,247,0.3)" },
 ];
 
-function TiltCard({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
+// Neo-brutal card: bold border + hard offset shadow
+function NeoCard({ children, className, style, shadowColor = "#ff3cac" }: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  shadowColor?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width  - 0.5;
-    const y = (e.clientY - rect.top)  / rect.height - 0.5;
-    el.style.transform = `perspective(600px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg) translateY(-2px)`;
-    el.style.boxShadow = `${-x * 10}px ${-y * 10}px 30px rgba(255,60,172,0.08)`;
+  const onEnter = () => {
+    const el = ref.current; if (!el) return;
+    el.style.transform = "translate(3px,3px)";
+    el.style.boxShadow = `2px 2px 0px ${shadowColor}`;
   };
-
   const onLeave = () => {
-    const el = ref.current;
-    if (!el) return;
+    const el = ref.current; if (!el) return;
     el.style.transform = "";
-    el.style.boxShadow = "";
+    el.style.boxShadow = `5px 5px 0px ${shadowColor}`;
   };
 
   return (
     <div
       ref={ref}
       className={className}
-      onMouseMove={onMove}
+      onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease", ...style }}
+      style={{ border: "2px solid #2a2a2a", boxShadow: `5px 5px 0px ${shadowColor}`, transition: "transform 0.12s ease, box-shadow 0.12s ease", ...style }}
     >
       {children}
     </div>
@@ -107,7 +107,7 @@ export default function Bento() {
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
 
           {/* Bio */}
-          <TiltCard className="bcard sm:col-span-2 lg:col-span-7 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#ff3cac]/40 transition-colors cursor-default">
+          <NeoCard shadowColor="#ff3cac" className="bcard sm:col-span-2 lg:col-span-7 bg-[#141414] p-5 sm:p-7 cursor-default">
             <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">who dis</span>
             <h3 className="font-syne font-extrabold text-xl sm:text-2xl tracking-tight mb-3">Hi, I&apos;m Ansh.</h3>
             <p className="text-[#777] text-sm leading-relaxed mb-5 sm:mb-6">
@@ -124,20 +124,20 @@ export default function Bento() {
                 </div>
               ))}
             </div>
-          </TiltCard>
+          </NeoCard>
 
           {/* Vibe */}
-          <TiltCard className="bcard lg:col-span-5 bg-[#0f0f0f] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#a855f7]/30 transition-colors cursor-default">
+          <NeoCard shadowColor="#a855f7" className="bcard lg:col-span-5 bg-[#0f0f0f] p-5 sm:p-7 cursor-default">
             <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">current vibe</span>
             <div className="flex flex-col gap-2">
               {["🎧 coding playlist: lo-fi beats","☕ fuel: oat milk latte","📍 location: earth (remote)","🛠 building: something cool"].map((v) => (
                 <div key={v} className="bg-[#141414] border border-[#232323] rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-[#aaa] hover:border-[#ff3cac]/50 hover:text-white transition-all cursor-default">{v}</div>
               ))}
             </div>
-          </TiltCard>
+          </NeoCard>
 
           {/* Stack */}
-          <TiltCard className="bcard sm:col-span-2 lg:col-span-8 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#3b82f6]/30 transition-colors cursor-default">
+          <NeoCard shadowColor="#3b82f6" className="bcard sm:col-span-2 lg:col-span-8 bg-[#141414] p-5 sm:p-7 cursor-default">
             <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">tech stack</span>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {skills.map((s) => (
@@ -147,19 +147,19 @@ export default function Bento() {
                 </span>
               ))}
             </div>
-          </TiltCard>
+          </NeoCard>
 
           {/* Fact */}
-          <TiltCard className="bcard lg:col-span-4 rounded-2xl p-5 sm:p-7 cursor-default"
-            style={{ background: "linear-gradient(135deg,rgba(255,60,172,0.08),rgba(168,85,247,0.08))", border: "1px solid rgba(255,60,172,0.2)" }}>
+          <NeoCard className="bcard lg:col-span-4 p-5 sm:p-7 cursor-default"
+            style={{ background: "linear-gradient(135deg,rgba(255,60,172,0.08),rgba(168,85,247,0.08))" }}>
             <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">fun fact</span>
             <p className="text-sm leading-relaxed italic text-[#ccc]">
               &ldquo;I once fixed a production bug at 2am in my pajamas. The client never knew. That&apos;s the job.&rdquo; 💀
             </p>
-          </TiltCard>
+          </NeoCard>
 
           {/* Metrics */}
-          <TiltCard className="bcard lg:col-span-6 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#f9f002]/20 transition-colors cursor-default">
+          <NeoCard shadowColor="#f9f002" className="bcard lg:col-span-6 bg-[#141414] p-5 sm:p-7 cursor-default">
             <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">by the numbers</span>
             <div className="flex gap-6 sm:gap-8 flex-wrap">
               {[["99", "%", "uptime goal"], ["100", "ms", "API response"], ["10000", "+req/s", "handled"]].map(([n, s, l]) => (
@@ -171,10 +171,10 @@ export default function Bento() {
                 </div>
               ))}
             </div>
-          </TiltCard>
+          </NeoCard>
 
           {/* Socials */}
-          <TiltCard className="bcard lg:col-span-6 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#39ff14]/20 transition-colors cursor-default">
+          <NeoCard shadowColor="#f9f002" className="bcard lg:col-span-6 bg-[#141414] p-5 sm:p-7 cursor-default">
             <span className="font-fira text-[0.65rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">find me</span>
             <div className="flex flex-col gap-2">
               {[
@@ -189,7 +189,7 @@ export default function Bento() {
                 </a>
               ))}
             </div>
-          </TiltCard>
+          </NeoCard>
 
         </div>
       </div>

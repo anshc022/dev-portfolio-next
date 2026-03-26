@@ -47,20 +47,21 @@ export default function Contact() {
           Hit me up. 📩
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <a href="mailto:ansh@example.com"
-            className="group flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full bg-[#ff3cac] text-white font-semibold text-sm hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,60,172,0.4)] transition-all">
-            <span>ansh@example.com</span>
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
-          <a href="https://github.com/anshc022" target="_blank" rel="noreferrer"
-            className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full border border-[#2a2a2a] text-white font-semibold text-sm hover:border-[#ff3cac] hover:text-[#ff3cac] transition-all">
-            GitHub ↗
-          </a>
-          <a href="#" target="_blank" rel="noreferrer"
-            className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full border border-[#2a2a2a] text-white font-semibold text-sm hover:border-[#ff3cac] hover:text-[#ff3cac] transition-all">
-            LinkedIn ↗
-          </a>
+        <div className="flex flex-col sm:flex-row gap-4">
+          {[
+            { href: "mailto:ansh@example.com", label: "ansh@example.com →", bg: "#ff3cac", color: "#fff", shadow: "#fff" },
+            { href: "https://github.com/anshc022", label: "GitHub ↗", bg: "#f9f002", color: "#000", shadow: "#ff3cac" },
+            { href: "#", label: "LinkedIn ↗", bg: "#0d0d0d", color: "#fff", shadow: "#a855f7" },
+          ].map((b) => (
+            <a key={b.label} href={b.href} target={b.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
+              className="flex items-center justify-center px-6 sm:px-8 py-4 font-bold text-sm uppercase tracking-wide transition-all"
+              style={{ background: b.bg, color: b.color, border: "2px solid #fff", boxShadow: `4px 4px 0px ${b.shadow}` }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translate(2px,2px)"; (e.currentTarget as HTMLElement).style.boxShadow = `2px 2px 0px ${b.shadow}`; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.boxShadow = `4px 4px 0px ${b.shadow}`; }}
+            >
+              {b.label}
+            </a>
+          ))}
         </div>
       </div>
     </section>
