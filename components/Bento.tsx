@@ -95,53 +95,53 @@ export default function Bento() {
   }, []);
 
   return (
-    <section id="about" className="py-24">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="mb-12">
-          <p className="font-fira text-[0.75rem] text-[#ff3cac] uppercase tracking-[2px] mb-2">01 / about</p>
-          <h2 className="font-syne font-extrabold tracking-tight" style={{ fontSize: "clamp(2rem,5vw,3rem)", letterSpacing: "-1.5px" }}>
+    <section id="about" className="py-16 sm:py-24">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6">
+        <div className="mb-10 sm:mb-12">
+          <p className="font-fira text-[0.7rem] sm:text-[0.75rem] text-[#ff3cac] uppercase tracking-[2px] mb-2">01 / about</p>
+          <h2 className="font-syne font-extrabold tracking-tight" style={{ fontSize: "clamp(1.8rem,5vw,3rem)", letterSpacing: "-1.5px" }}>
             Who I Am
           </h2>
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-12 gap-3.5">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
 
           {/* Bio */}
-          <TiltCard className="bcard col-span-12 lg:col-span-7 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-7 hover:border-[#ff3cac]/40 transition-colors cursor-default">
-            <span className="font-fira text-[0.65rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">who dis</span>
-            <h3 className="font-syne font-extrabold text-2xl tracking-tight mb-3">Hi, I&apos;m Ansh.</h3>
-            <p className="text-[#777] text-sm leading-relaxed mb-6">
+          <TiltCard className="bcard sm:col-span-2 lg:col-span-7 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#ff3cac]/40 transition-colors cursor-default">
+            <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">who dis</span>
+            <h3 className="font-syne font-extrabold text-xl sm:text-2xl tracking-tight mb-3">Hi, I&apos;m Ansh.</h3>
+            <p className="text-[#777] text-sm leading-relaxed mb-5 sm:mb-6">
               3+ years turning coffee ☕ into code. I love clean architecture, fast APIs, and UIs that don&apos;t make users cry.
               Strong opinions about tabs vs spaces (spaces, fight me 🥊).
             </p>
-            <div className="flex gap-8">
+            <div className="flex gap-6 sm:gap-8">
               {[["3", "+", "yrs exp"], ["20", "+", "projects"], ["0", "*", "bugs in prod"]].map(([n, s, l]) => (
                 <div key={l}>
-                  <div className="font-syne font-extrabold text-3xl gradient-text leading-none">
+                  <div className="font-syne font-extrabold text-2xl sm:text-3xl gradient-text leading-none">
                     <CountUp to={parseInt(n)} suffix={s} />
                   </div>
-                  <div className="font-fira text-[0.65rem] text-[#555] uppercase tracking-wide mt-1">{l}</div>
+                  <div className="font-fira text-[0.6rem] text-[#555] uppercase tracking-wide mt-1">{l}</div>
                 </div>
               ))}
             </div>
           </TiltCard>
 
           {/* Vibe */}
-          <TiltCard className="bcard col-span-12 lg:col-span-5 bg-[#0f0f0f] border border-[#2a2a2a] rounded-2xl p-7 hover:border-[#a855f7]/30 transition-colors cursor-default">
-            <span className="font-fira text-[0.65rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">current vibe</span>
+          <TiltCard className="bcard lg:col-span-5 bg-[#0f0f0f] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#a855f7]/30 transition-colors cursor-default">
+            <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">current vibe</span>
             <div className="flex flex-col gap-2">
               {["🎧 coding playlist: lo-fi beats","☕ fuel: oat milk latte","📍 location: earth (remote)","🛠 building: something cool"].map((v) => (
-                <div key={v} className="bg-[#141414] border border-[#232323] rounded-xl px-4 py-3 text-sm text-[#aaa] hover:border-[#ff3cac]/50 hover:text-white transition-all cursor-default">{v}</div>
+                <div key={v} className="bg-[#141414] border border-[#232323] rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-[#aaa] hover:border-[#ff3cac]/50 hover:text-white transition-all cursor-default">{v}</div>
               ))}
             </div>
           </TiltCard>
 
           {/* Stack */}
-          <TiltCard className="bcard col-span-12 lg:col-span-8 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-7 hover:border-[#3b82f6]/30 transition-colors cursor-default">
-            <span className="font-fira text-[0.65rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">tech stack</span>
-            <div className="flex flex-wrap gap-2">
+          <TiltCard className="bcard sm:col-span-2 lg:col-span-8 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#3b82f6]/30 transition-colors cursor-default">
+            <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">tech stack</span>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {skills.map((s) => (
-                <span key={s.label} className="px-3.5 py-1.5 rounded-full text-xs font-semibold cursor-default transition-transform hover:scale-110 hover:-rotate-1"
+                <span key={s.label} className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-xs font-semibold cursor-default transition-transform hover:scale-110 hover:-rotate-1"
                   style={{ color: s.color, background: s.bg, border: `1px solid ${s.border}` }}>
                   {s.label}
                 </span>
@@ -150,31 +150,31 @@ export default function Bento() {
           </TiltCard>
 
           {/* Fact */}
-          <TiltCard className="bcard col-span-12 lg:col-span-4 rounded-2xl p-7 cursor-default"
+          <TiltCard className="bcard lg:col-span-4 rounded-2xl p-5 sm:p-7 cursor-default"
             style={{ background: "linear-gradient(135deg,rgba(255,60,172,0.08),rgba(168,85,247,0.08))", border: "1px solid rgba(255,60,172,0.2)" }}>
-            <span className="font-fira text-[0.65rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">fun fact</span>
+            <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">fun fact</span>
             <p className="text-sm leading-relaxed italic text-[#ccc]">
               &ldquo;I once fixed a production bug at 2am in my pajamas. The client never knew. That&apos;s the job.&rdquo; 💀
             </p>
           </TiltCard>
 
           {/* Metrics */}
-          <TiltCard className="bcard col-span-12 lg:col-span-6 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-7 hover:border-[#f9f002]/20 transition-colors cursor-default">
-            <span className="font-fira text-[0.65rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">by the numbers</span>
-            <div className="flex gap-8 flex-wrap">
+          <TiltCard className="bcard lg:col-span-6 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#f9f002]/20 transition-colors cursor-default">
+            <span className="font-fira text-[0.6rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">by the numbers</span>
+            <div className="flex gap-6 sm:gap-8 flex-wrap">
               {[["99", "%", "uptime goal"], ["100", "ms", "API response"], ["10000", "+req/s", "handled"]].map(([n, s, l]) => (
                 <div key={l}>
-                  <div className="font-syne font-extrabold text-4xl text-[#f9f002] leading-none tracking-tight">
+                  <div className="font-syne font-extrabold text-3xl sm:text-4xl text-[#f9f002] leading-none tracking-tight">
                     <CountUp to={parseInt(n)} suffix={s} />
                   </div>
-                  <div className="font-fira text-[0.65rem] text-[#555] uppercase tracking-wide mt-1">{l}</div>
+                  <div className="font-fira text-[0.6rem] text-[#555] uppercase tracking-wide mt-1">{l}</div>
                 </div>
               ))}
             </div>
           </TiltCard>
 
           {/* Socials */}
-          <TiltCard className="bcard col-span-12 lg:col-span-6 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-7 hover:border-[#39ff14]/20 transition-colors cursor-default">
+          <TiltCard className="bcard lg:col-span-6 bg-[#141414] border border-[#2a2a2a] rounded-2xl p-5 sm:p-7 hover:border-[#39ff14]/20 transition-colors cursor-default">
             <span className="font-fira text-[0.65rem] text-[#888] uppercase tracking-widest bg-[#1a1a1a] px-2.5 py-1 rounded-full mb-4 inline-block">find me</span>
             <div className="flex flex-col gap-2">
               {[

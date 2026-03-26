@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 const projects = [
   {
-    num: "01", title: "DevFlow",  tag: "featured",
+    num: "01", title: "DevFlow", tag: "featured",
     desc: "Full-stack platform for engineering teams — sprint tracking, PR reviews, deployment monitoring. No more 47-tab Jira nightmares. 🙏",
     stack: ["React", "Node.js", "PostgreSQL", "Docker"], github: "#", demo: "#", year: "2024",
   },
@@ -41,7 +41,7 @@ export default function Projects() {
           obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     cards.forEach((c) => {
       (c as HTMLElement).style.cssText += "opacity:0;transform:translateX(-20px);transition:opacity 0.5s ease,transform 0.5s ease";
       obs.observe(c);
@@ -50,11 +50,11 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="work" className="py-24">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="mb-14">
-          <p className="font-fira text-[0.75rem] text-[#ff3cac] uppercase tracking-[2px] mb-2">02 / work</p>
-          <h2 className="font-syne font-extrabold tracking-tight" style={{ fontSize: "clamp(2rem,5vw,3rem)", letterSpacing: "-1.5px" }}>
+    <section id="work" className="py-16 sm:py-24">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6">
+        <div className="mb-10 sm:mb-14">
+          <p className="font-fira text-[0.7rem] sm:text-[0.75rem] text-[#ff3cac] uppercase tracking-[2px] mb-2">02 / work</p>
+          <h2 className="font-syne font-extrabold tracking-tight" style={{ fontSize: "clamp(1.8rem,5vw,3rem)", letterSpacing: "-1.5px" }}>
             Selected Projects<span className="text-[#ff3cac] animate-pulse">_</span>
           </h2>
         </div>
@@ -63,38 +63,41 @@ export default function Projects() {
           {projects.map((p, i) => (
             <div
               key={p.num}
-              className="pcard relative bg-[#111] px-8 py-7 transition-colors cursor-default"
+              className="pcard relative cursor-default transition-colors"
               style={{ background: hovered === i ? "#161616" : "#111" }}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
               {/* Accent line on hover */}
-              <div className="absolute left-0 top-0 bottom-0 w-[2px] rounded-full transition-all duration-300"
+              <div className="absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-300"
                 style={{ background: "linear-gradient(#ff3cac,#a855f7)", opacity: hovered === i ? 1 : 0 }} />
 
-              <div className="grid grid-cols-[52px_1fr_auto] gap-6 items-start">
-                <span className="font-fira text-xs text-[#333] mt-1">{p.num}</span>
-
-                <div>
-                  <div className="flex items-center gap-3 mb-2 flex-wrap">
-                    <h3 className="font-syne font-extrabold text-xl tracking-tight">{p.title}</h3>
-                    {p.tag && (
-                      <span className="font-fira text-[0.6rem] uppercase tracking-wide px-2 py-0.5 rounded-full font-semibold bg-[rgba(255,60,172,0.15)] text-[#ff3cac] border border-[rgba(255,60,172,0.3)]">
-                        {p.tag}
-                      </span>
-                    )}
-                    <span className="font-fira text-[0.65rem] text-[#333] ml-auto">{p.year}</span>
-                  </div>
-                  <p className="text-sm text-[#666] leading-relaxed mb-3">{p.desc}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {p.stack.map((s) => (
-                      <span key={s} className="font-fira text-[0.65rem] text-[#444] bg-[#0d0d0d] border border-[#1e1e1e] px-2.5 py-0.5 rounded-full">{s}</span>
-                    ))}
+              <div className="px-5 sm:px-8 py-5 sm:py-7">
+                {/* Top row: number + title + tag + year */}
+                <div className="flex items-start gap-3 sm:gap-6 mb-3">
+                  <span className="font-fira text-[0.65rem] text-[#333] mt-1.5 shrink-0 hidden sm:block">{p.num}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap mb-2">
+                      <h3 className="font-syne font-extrabold text-lg sm:text-xl tracking-tight">{p.title}</h3>
+                      {p.tag && (
+                        <span className="font-fira text-[0.55rem] sm:text-[0.6rem] uppercase tracking-wide px-2 py-0.5 rounded-full font-semibold bg-[rgba(255,60,172,0.15)] text-[#ff3cac] border border-[rgba(255,60,172,0.3)]">
+                          {p.tag}
+                        </span>
+                      )}
+                      <span className="font-fira text-[0.6rem] text-[#333] ml-auto">{p.year}</span>
+                    </div>
+                    <p className="text-sm text-[#666] leading-relaxed mb-3">{p.desc}</p>
+                    <div className="flex flex-wrap gap-1.5 mb-3 sm:mb-0">
+                      {p.stack.map((s) => (
+                        <span key={s} className="font-fira text-[0.6rem] sm:text-[0.65rem] text-[#444] bg-[#0d0d0d] border border-[#1e1e1e] px-2 sm:px-2.5 py-0.5 rounded-full">{s}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 items-end mt-1 shrink-0">
-                  <a href={p.github} className="font-fira text-xs text-[#444] hover:text-white transition-colors">GitHub →</a>
+                {/* Links row — always visible on mobile */}
+                <div className="flex gap-4 sm:gap-0 sm:absolute sm:right-8 sm:top-7 items-center">
+                  <a href={p.github} className="font-fira text-xs text-[#444] hover:text-white transition-colors sm:block sm:mb-2">GitHub →</a>
                   <a href={p.demo} className="font-fira text-xs text-[#ff3cac] hover:underline">Demo ↗</a>
                 </div>
               </div>
